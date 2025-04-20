@@ -104,6 +104,11 @@ Key Features:
 - Designed for clarity, simplicity, and instant interaction
 
 Screenshots from the demo:
+![Homepage Screenshot](web_page/screenshots/web_2.png)
+![Upload Screenshot](web_page/screenshots/web_3.png)
+![Tips Screenshot](web_page/screenshots/web_4.png)
+![FAQ Screenshot](web_page/screenshots/web_1.png)
+
 
 ## How to run?
 1. Install Dependencies  
