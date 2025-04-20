@@ -1,0 +1,256 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BreedScope</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <img src="photo/icon.png" alt="Paw Icon" class="nav-icon">
+            <span class="brand">BreedScope</span>
+        </div>
+        <div class="navbar-right menu">
+            <div class="menu-item"><a href="#identify">Identify Dog Breed</a><div class="wee"></div></div>
+            <div class="menu-item"><a href="#tips">Tips</a><div class="wee"></div></div>
+            <div class="menu-item"><a href="#faq">FAQ</a><div class="wee"></div></div>
+        </div>
+    </nav>
+
+    <header>
+        <h1 class="hero-title">
+            <span class="highlighted">Breed</span>Scope
+        </h1>
+
+        <p>Curious about your dog's breed? Upload a photo and get instant identification in seconds! 🐶</p>
+        <img src="photo/dog_1.png" class="dog-img left-dog" alt="Dog_1">
+        <img src="photo/dog_2.png" class="dog-img right-dog" alt="Dog_2">
+
+        <!-- Left speech bubble -->
+        <div class="speech-bubble left-bubble">
+            Who am I?
+        </div>
+
+        <!-- Right speech bubble -->
+        <div class="speech-bubble right-bubble">
+            I don’t know... a pug??
+        </div>
+    </header>
+
+    <div class="upload-section">
+        <div class="upload-box">
+            <h2>Upload Photo</h2>
+            <div class="drop-area" id="drop-area">
+                <input type="file" id="fileElem" accept="image/*" style="display:none">
+                <label for="fileElem">Drop your image here or click to upload</label>
+            </div>
+            <button class="scan-btn">Scan</button>
+        </div>
+            <div class="preview-box">
+                <div class="result" id="result">Result will appear here...</div>
+                <img id="preview" src="" alt="Image preview" style="display:none;" />
+            </div>
+        
+        </div>
+
+        <section class="tips-section" id="tips">
+            <h2>Tips to Get the Best Out of BreedScope</h2>
+            <p class="subtitle">Improve accuracy by following these simple steps</p>
+            <div class="tips-container">
+                <div class="tip-box">
+                    <h3>Use Good Lighting</h3>
+                    <p>Make sure your dog is well-lit to avoid shadows that hide its features. Daylight works best.</p>
+                </div>
+                <div class="tip-box">
+                    <h3>Frontal Pose</h3>
+                    <p>Take the photo from the front, so the dog is directly facing the camera. It helps the AI.</p>
+                </div>
+                <div class="tip-box">
+                    <h3>Single Dog Only</h3>
+                    <p>Make sure there's only one dog in the image to avoid confusion during prediction.</p>
+                </div>
+                <div class="tip-box">
+                    <h3>Avoid Obstructions</h3>
+                    <p>Remove accessories that might block facial features, like scarves or hats.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq-section" id="faq">
+            <h2>Frequently asked questions</h2>
+            <div class="faq-container">
+
+                <div class="faq-item">
+                    <button class="faq-question">How does the dog breed analysis work?</button>
+                    <div class="faq-answer">
+                        <p>
+                            Our system uses a deep learning model trained on thousands of labeled dog images.
+                            When you upload a photo, the image is preprocessed and passed through a neural network
+                            (based on the ResNet18 architecture). The model analyzes key features like ear shape,
+                            snout, fur texture, and coloration to predict the breed with high confidence.
+                            The predicted breed is then displayed instantly for your reference.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question"> Can the tool detect multiple dogs in a photo?</button>
+                    <div class="faq-answer">
+                        <p>
+                            Currently, the tool is optimized to analyze one dog per image. When multiple dogs are present in a single photo, the model may struggle to determine which dog to focus on, which can reduce the accuracy of the prediction or result in a misclassification.
+                        </p>
+                        <p>
+                            To ensure reliable results, we recommend uploading photos where only one dog is clearly visible and centered in the frame. If you want to analyze multiple dogs, it's best to upload separate photos for each one.
+                        </p>
+                        <p>
+                            Future updates may introduce the ability to detect and analyze multiple dogs in the same image, but for now, focusing on one dog per photo provides the most accurate breed identification.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">How accurate is the prediction?</button>
+                    <div class="faq-answer">
+                        <p>
+                            Our model achieves high accuracy on most popular breeds, especially when the input image is clear.
+                            However, results may vary for mixed breeds or unusual angles.
+                            We're continuously improving the model with more training data.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="faq-item">
+                    <button class="faq-question">Will this work with puppies?</button>
+                    <div class="faq-answer">
+                        <p>
+                            Yes, the tool can be used to identify the breed of a puppy, but please note that the accuracy may vary depending on the age and appearance of the puppy.
+                        </p>
+                        <p>
+                            Puppies often haven’t fully developed the physical traits that are typical of their breed — such as body proportions, fur texture, and facial structure — which are more distinct in adult dogs. As a result, the model may struggle to identify the correct breed with full confidence.
+                        </p>
+                        <p>
+                            For best results, try to upload clear and well-lit photos where the puppy is facing the camera and is not obstructed by objects or other pets. Keep in mind that as your puppy grows, the predictions will likely become more accurate.
+                        </p>
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+
+
+        <script>
+            const dropArea = document.getElementById('drop-area');
+            const fileInput = document.getElementById('fileElem');
+            const resultDiv = document.getElementById('result');
+
+            dropArea.addEventListener('click', () => {
+                fileInput.click();
+            });
+
+            fileInput.addEventListener('change', () => {
+                const file = fileInput.files[0];
+                if (file && file.type.startsWith('image/')) {
+                    resultDiv.innerText = "Upload completed successfully!";
+                } else {
+                    resultDiv.innerText = "Please select a valid image file.";
+                }
+            });
+
+            dropArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropArea.classList.add('dragover');
+            });
+
+            dropArea.addEventListener('dragleave', () => {
+                dropArea.classList.remove('dragover');
+            });
+
+            dropArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropArea.classList.remove('dragover');
+                const file = e.dataTransfer.files[0];
+                if (file && file.type.startsWith('image/')) {
+                    resultDiv.innerText = "Upload completed successfully!";
+                } else {
+                    resultDiv.innerText = "Please drop a valid image file.";
+                }
+            });
+        </script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const faqItems = document.querySelectorAll(".faq-item");
+
+                faqItems.forEach(item => {
+                    const question = item.querySelector(".faq-question");
+
+                    question.addEventListener("click", () => {
+
+                        faqItems.forEach(i => {
+                            if (i !== item) {
+                                i.classList.remove("active");
+                            }
+                        });
+
+                        item.classList.toggle("active");
+                    });
+                });
+            });
+        </script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const scanBtn = document.querySelector(".scan-btn");
+                const fileInput = document.getElementById("fileElem");
+                const resultDiv = document.getElementById("result");
+                const preview = document.getElementById("preview");
+
+                fileInput.addEventListener("change", () => {
+                    const file = fileInput.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function (e) {
+                            preview.src = e.target.result;
+                            preview.style.display = "block";
+                        };
+                        reader.readAsDataURL(file);
+                    } else {
+                        preview.src = "";
+                        preview.style.display = "none";
+                    }
+                });
+                scanBtn.addEventListener("click", async () => {
+                    const file = fileInput.files[0];
+                    if (!file) {
+                        resultDiv.innerText = "Please upload an image first.";
+                        return;
+                    }
+
+                    resultDiv.innerText = "Scanning... 🐾";
+
+                    const formData = new FormData();
+                    formData.append("file", file);
+
+                    try {
+                        const response = await fetch("http://localhost:5000/predict", {
+                            method: "POST",
+                            body: formData
+                        });
+
+                        const data = await response.json();
+                        resultDiv.innerText = `Breed: ${data.class}`;
+                    } catch (err) {
+                        console.error(err);
+                        resultDiv.innerText = "Prediction failed. Please try again.";
+                    }
+                });
+            });
+        </script>
+
+
+</body>
+</html>
